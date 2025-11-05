@@ -6,6 +6,20 @@
     <title>Sign Up - University Portal</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .error-message {
+            color: #EF4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .success-message {
+            color: #10B981;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
     <div class="w-full max-w-md">
@@ -16,17 +30,18 @@
                  class="mx-auto max-w-[200px]">
         </div>
         
-        <!-- Login Form -->
+        <!-- Sign Up Form -->
         <div class="bg-white rounded-lg shadow-md p-8">
             <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Sign Up</h1>
             
-            <form>
+            <form id="signupForm">
                 <!-- Username Field -->
                 <div class="mb-4">
                     <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
                     <input type="text" id="username" name="username" 
                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" 
                            required>
+                    <div id="usernameError" class="error-message">Please enter a valid username</div>
                 </div>
                 
                 <!-- Password Field -->
@@ -35,6 +50,16 @@
                     <input type="password" id="password" name="password" 
                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" 
                            required>
+                    <div id="passwordError" class="error-message">Please enter a password (min. 6 characters)</div>
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div class="mb-4">
+                    <label for="confirmPassword" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" 
+                           required>
+                    <div id="confirmPasswordError" class="error-message">Passwords do not match</div>
                 </div>
                 
                 <!-- Department Dropdown -->
@@ -54,24 +79,182 @@
                         <option value="medicine">Medicine</option>
                         <option value="pharmacy">Pharmacy</option>
                     </select>
+                    <div id="departmentError" class="error-message">Please select your department</div>
                 </div>
+
+                <!-- Sign Up Status Message -->
+                <div id="signupStatus" class="success-message mb-4"></div>
                 
-                <!-- Green Login Button -->
+                <!-- Green Sign Up Button -->
                 <button type="submit" 
-                        class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-md transition duration-200">
-                    Sign Up
+                        class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-md transition duration-200 flex items-center justify-center">
+                    <span id="signupText">Sign Up</span>
+                    <i id="signupSpinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
                 </button>
             </form>
             
-            <!-- Sign Up Link -->
+            <!-- Login Link -->
             <div class="text-center mt-6 text-gray-600">
                 Already have an account? 
                 <a href="login.html" class="text-green-600 hover:text-green-800 font-medium">Login here</a>.
             </div>
-            
-            
-
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const signupForm = document.getElementById('signupForm');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const departmentInput = document.getElementById('department');
+            const signupText = document.getElementById('signupText');
+            const signupSpinner = document.getElementById('signupSpinner');
+            const signupStatus = document.getElementById('signupStatus');
+            
+            // Check if user is already logged in
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                // Redirect to admin page if already logged in
+                window.location.href = 'admin.html';
+            }
+            
+            // Form submission handler
+            signupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Reset error messages
+                resetErrorMessages();
+                
+                // Validate form
+                let isValid = true;
+                
+                if (!usernameInput.value.trim()) {
+                    showError('usernameError', 'Please enter a username');
+                    isValid = false;
+                }
+                
+                if (!passwordInput.value || passwordInput.value.length < 6) {
+                    showError('passwordError', 'Password must be at least 6 characters long');
+                    isValid = false;
+                }
+                
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    showError('confirmPasswordError', 'Passwords do not match');
+                    isValid = false;
+                }
+                
+                if (!departmentInput.value) {
+                    showError('departmentError', 'Please select your department');
+                    isValid = false;
+                }
+                
+                if (!isValid) return;
+                
+                // Check if username already exists
+                const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+                const usernameExists = existingUsers.some(user => user.username === usernameInput.value.trim());
+                
+                if (usernameExists) {
+                    showError('usernameError', 'Username already exists. Please choose a different one.');
+                    return;
+                }
+                
+                // Show loading state
+                signupText.textContent = 'Creating Account...';
+                signupSpinner.classList.remove('hidden');
+                
+                // Simulate signup process (in a real app, this would be an API call)
+                setTimeout(function() {
+                    // Create user object
+                    const user = {
+                        username: usernameInput.value.trim(),
+                        password: passwordInput.value, // In a real app, this would be hashed
+                        department: departmentInput.value,
+                        departmentName: departmentInput.options[departmentInput.selectedIndex].text,
+                        role: 'admin', // Set role as admin for signup
+                        signupTime: new Date().toISOString(),
+                        lastActivity: new Date().toISOString()
+                    };
+                    
+                    // Save user to localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    
+                    // Add to existing users
+                    existingUsers.push(user);
+                    localStorage.setItem('users', JSON.stringify(existingUsers));
+                    
+                    // Save admin users separately if needed
+                    const adminUsers = JSON.parse(localStorage.getItem('adminUsers')) || [];
+                    adminUsers.push(user);
+                    localStorage.setItem('adminUsers', JSON.stringify(adminUsers));
+                    
+                    // Show success message
+                    showSuccess('signupStatus', 'Account created successfully! Redirecting to admin dashboard...');
+                    
+                    // Redirect to admin page after a short delay
+                    setTimeout(function() {
+                        window.location.href = 'admin.html';
+                    }, 1500);
+                    
+                }, 1500); // Simulate network delay
+            });
+            
+            // Helper functions
+            function showError(elementId, message) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+            
+            function showSuccess(elementId, message) {
+                const successElement = document.getElementById(elementId);
+                successElement.textContent = message;
+                successElement.style.display = 'block';
+            }
+            
+            function resetErrorMessages() {
+                const errorMessages = document.querySelectorAll('.error-message');
+                errorMessages.forEach(msg => {
+                    msg.style.display = 'none';
+                });
+                signupStatus.style.display = 'none';
+            }
+            
+            // Input validation on blur
+            usernameInput.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    showError('usernameError', 'Please enter a username');
+                }
+            });
+            
+            passwordInput.addEventListener('blur', function() {
+                if (!this.value || this.value.length < 6) {
+                    showError('passwordError', 'Password must be at least 6 characters long');
+                }
+            });
+            
+            confirmPasswordInput.addEventListener('blur', function() {
+                if (this.value !== passwordInput.value) {
+                    showError('confirmPasswordError', 'Passwords do not match');
+                }
+            });
+            
+            departmentInput.addEventListener('change', function() {
+                if (this.value) {
+                    document.getElementById('departmentError').style.display = 'none';
+                }
+            });
+
+            // Real-time password confirmation validation
+            confirmPasswordInput.addEventListener('input', function() {
+                if (this.value !== passwordInput.value) {
+                    showError('confirmPasswordError', 'Passwords do not match');
+                } else {
+                    document.getElementById('confirmPasswordError').style.display = 'none';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
