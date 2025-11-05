@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Waste Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .mobile-card {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        .btn-accept {
+            background-color: #10B981;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.75rem;
+            transition: background-color 0.2s;
+        }
+        .btn-accept:hover {
+            background-color: #059669;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation Header -->
+    <header class="bg-green-700 text-white p-4 shadow-md sticky top-0 z-10">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.uniport.edu.ng/wp-content/themes/unipix/assets/images/logo/uniport_logo1.png" 
+                     alt="University of Port Harcourt Logo" 
+                     class="h-10 w-auto">
+                <h1 class="text-lg font-bold">Unique Waste Management System</h1>
+            </div>
+            <div class="flex space-x-2">
+                <a href="dashboard.html" class="px-3 py-1 rounded-md text-sm font-medium hover:bg-green-600">User Dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4">
+        <!-- Page Title -->
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Disposer Dashboard</h1>
+            <p class="text-gray-600 mt-1">Manage waste disposal requests</p>
+        </div>
+        
+        <!-- Unaccepted Disposal Requests -->
+        <div class="bg-white rounded-lg shadow-md p-4 mb-6 mobile-card">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Unaccepted Disposal Requests</h2>
+            
+            <!-- Mobile Card View for Unaccepted Requests -->
+            <div class="space-y-4 md:hidden">
+                <div class="border border-gray-200 rounded-lg p-3">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-medium">Level: 45%</span>
+                        <span class="text-sm text-gray-500">computer science</span>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div><span class="font-medium">Reported:</span> 2025-10-22 07:29:03</div>
+                    </div>
+                    <div class="mt-3">
+                        <button class="btn-accept w-full py-2">
+                            Accept Request
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop Table View for Unaccepted Requests -->
+            <div class="hidden md:block overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Waste Bin Level (%)</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Requester</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Date Reported</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 border-b">45</td>
+                            <td class="py-3 px-4 border-b">computer science</td>
+                            <td class="py-3 px-4 border-b">2025-10-22 07:29:03</td>
+                            <td class="py-3 px-4 border-b">
+                                <button class="btn-accept">
+                                    Accept Request
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Accepted Disposal History -->
+        <div class="bg-white rounded-lg shadow-md p-4 mobile-card">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Accepted Disposal History</h2>
+            
+            <!-- Mobile Card View for Accepted History -->
+            <div class="space-y-4 md:hidden">
+                <div class="border border-gray-200 rounded-lg p-3">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-medium">Level: 70%</span>
+                        <span class="text-sm text-gray-500">computer science</span>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div><span class="font-medium">Reported:</span> 2025-10-22 07:12:44</div>
+                        <div><span class="font-medium">Disposed By:</span> simion</div>
+                        <div><span class="font-medium">Disposed At:</span> 2025-10-22 07:13:40</div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-3">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-medium">Level: 85%</span>
+                        <span class="text-sm text-gray-500">computer science</span>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div><span class="font-medium">Reported:</span> 2025-10-22 03:22:54</div>
+                        <div><span class="font-medium">Disposed By:</span> simion</div>
+                        <div><span class="font-medium">Disposed At:</span> 2025-10-22 03:23:08</div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-3">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-medium">Level: 60%</span>
+                        <span class="text-sm text-gray-500">computer science</span>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div><span class="font-medium">Reported:</span> 2025-10-22 02:41:39</div>
+                        <div><span class="font-medium">Disposed By:</span> simion</div>
+                        <div><span class="font-medium">Disposed At:</span> -</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop Table View for Accepted History -->
+            <div class="hidden md:block overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Waste Bin Level (%)</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Requester</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Date Reported</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Disposed By</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Disposed At</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 border-b">70</td>
+                            <td class="py-3 px-4 border-b">computer science</td>
+                            <td class="py-3 px-4 border-b">2025-10-22 07:12:44</td>
+                            <td class="py-3 px-4 border-b">simion</td>
+                            <td class="py-3 px-4 border-b">2025-10-22 07:13:40</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 border-b">85</td>
+                            <td class="py-3 px-4 border-b">computer science</td>
+                            <td class="py-3 px-4 border-b">2025-10-22 03:22:54</td>
+                            <td class="py-3 px-4 border-b">simion</td>
+                            <td class="py-3 px-4 border-b">2025-10-22 03:23:08</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 border-b">60</td>
+                            <td class="py-3 px-4 border-b">computer science</td>
+                            <td class="py-3 px-4 border-b">2025-10-22 02:41:39</td>
+                            <td class="py-3 px-4 border-b">simion</td>
+                            <td class="py-3 px-4 border-b">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-8 py-4 text-center text-gray-500 text-sm">
+        <p>Unique Waste Management System &copy; 2025</p>
+    </footer>
+</body>
+</html>

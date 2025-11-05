@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Unique Waste Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-gradient {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+        }
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .stats-counter {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .profile-dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            z-index: 100;
+        }
+        .profile-container:hover .profile-dropdown {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Header -->
+    <header class="bg-green-700 text-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <img src="https://www.uniport.edu.ng/wp-content/themes/unipix/assets/images/logo/uniport_logo1.png" 
+                         alt="University of Port Harcourt Logo" 
+                         class="h-12 w-auto">
+                    <div>
+                        <h1 class="text-xl font-bold">Unique Waste Management System</h1>
+                        <p class="text-green-200 text-sm">University of Port Harcourt</p>
+                    </div>
+                </div>
+                
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex space-x-6 items-center">
+                    <a href="#home" class="font-medium hover:text-green-200 transition">Home</a>
+                    <a href="#features" class="font-medium hover:text-green-200 transition">Features</a>
+                    <a href="#how-it-works" class="font-medium hover:text-green-200 transition">How It Works</a>
+                    <!-- Dynamic Get Started / Dashboard Link -->
+                    <div id="dynamicNavLink">
+                        <!-- This will be populated by JavaScript -->
+                    </div>
+                </nav>
+                
+                <!-- Login Button / User Profile -->
+                <div id="authSection">
+                    <!-- This will be populated by JavaScript -->
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuButton" class="md:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient text-white">
+        <div class="container mx-auto px-4 py-16 md:py-24">
+            <div class="max-w-3xl mx-auto text-center">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Smart Waste Management Solution</h1>
+                <p class="text-xl mb-8 text-green-100">Monitor, report, and manage waste disposal efficiently with our innovative system designed for the University of Port Harcourt.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a id="heroGetStartedButton" href="login.html" class="bg-white text-green-700 font-semibold py-3 px-8 rounded-lg hover:bg-green-50 transition duration-300">
+                        Get Started
+                    </a>
+                    <a href="#features" class="bg-transparent border-2 border-white text-white font-semibold py-3 px-8 rounded-lg hover:bg-white hover:text-green-700 transition duration-300">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-700 mb-2">85%</div>
+                    <div class="text-gray-600">Bins Monitored</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-700 mb-2">42</div>
+                    <div class="text-gray-600">Active Requests</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-700 mb-2">98%</div>
+                    <div class="text-gray-600">Satisfaction Rate</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl font-bold text-green-700 mb-2">24/7</div>
+                    <div class="text-gray-600">Monitoring</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Key Features</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our system offers comprehensive waste management solutions for the university community.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white rounded-xl p-6 feature-card">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-binoculars text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Real-time Monitoring</h3>
+                    <p class="text-gray-600">Track waste bin levels in real-time and receive alerts when bins need attention.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white rounded-xl p-6 feature-card">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-chart-line text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Analytics & Reporting</h3>
+                    <p class="text-gray-600">Gain insights into waste generation patterns and optimize disposal schedules.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white rounded-xl p-6 feature-card">
+                    <div class="w-14 h-14 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-mobile-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-3">Mobile Friendly</h3>
+                    <p class="text-gray-600">Access the system from any device with our responsive, mobile-first design.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">How It Works</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our system simplifies waste management through a streamlined process.</p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center justify-between mb-12">
+                    <div class="md:w-2/5 mb-6 md:mb-0">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4">
+                            <span class="text-green-700 font-bold text-2xl">1</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center md:text-left mb-2">Report Waste Levels</h3>
+                        <p class="text-gray-600 text-center md:text-left">Users report current waste bin levels through the dashboard.</p>
+                    </div>
+                    <div class="md:w-3/5">
+                        <div class="bg-gray-100 rounded-lg p-6">
+                            <img src="https://images.unsplash.com/photo-1565688534245-05d6b5be184a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Reporting waste levels" class="rounded-lg w-full h-48 object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse items-center justify-between mb-12">
+                    <div class="md:w-2/5 mb-6 md:mb-0">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4">
+                            <span class="text-green-700 font-bold text-2xl">2</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center md:text-left mb-2">Admin Notification</h3>
+                        <p class="text-gray-600 text-center md:text-left">System notifies administrators when bins reach critical levels.</p>
+                    </div>
+                    <div class="md:w-3/5">
+                        <div class="bg-gray-100 rounded-lg p-6">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Admin notification" class="rounded-lg w-full h-48 object-cover">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="md:w-2/5 mb-6 md:mb-0">
+                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto md:mx-0 mb-4">
+                            <span class="text-green-700 font-bold text-2xl">3</span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-center md:text-left mb-2">Disposal & Tracking</h3>
+                        <p class="text-gray-600 text-center md:text-left">Disposal teams empty bins and track completion in the system.</p>
+                    </div>
+                    <div class="md:w-3/5">
+                        <div class="bg-gray-100 rounded-lg p-6">
+                            <img src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" 
+                                 alt="Waste disposal" class="rounded-lg w-full h-48 object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Started Section -->
+    <section id="get-started" class="py-16 bg-green-700 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Ready to improve waste management?</h2>
+            <p class="text-green-100 text-xl mb-8 max-w-2xl mx-auto">Join our system today and contribute to a cleaner, more sustainable campus environment.</p>
+            <a id="finalGetStartedButton" href="login.html" class="inline-block bg-white text-green-700 font-semibold py-3 px-8 rounded-lg hover:bg-green-50 transition duration-300">
+                Get Started Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <img src="https://www.uniport.edu.ng/wp-content/themes/unipix/assets/images/logo/uniport_logo1.png" 
+                             alt="University of Port Harcourt Logo" 
+                             class="h-10 w-auto">
+                        <h3 class="font-bold">Unique Waste Management System</h3>
+                    </div>
+                    <p class="text-gray-400">A smart solution for efficient waste management at the University of Port Harcourt.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-white transition">Home</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+                        <li><a href="#how-it-works" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+                        <li><a href="#get-started" class="text-gray-400 hover:text-white transition">Get Started</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>University of Port Harcourt</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-phone"></i>
+                            <span>+234 XXX XXX XXXX</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <i class="fas fa-envelope"></i>
+                            <span>support@uniport-waste.edu.ng</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4">Connect With Us</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Unique Waste Management System. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu (hidden by default) -->
+    <div id="mobileMenu" class="fixed inset-0 bg-green-700 z-50 hidden flex-col items-center justify-center p-4">
+        <button id="closeMenu" class="absolute top-4 right-4 text-white text-2xl">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="flex flex-col items-center space-y-6 text-white text-xl">
+            <a href="#home" class="font-medium">Home</a>
+            <a href="#features" class="font-medium">Features</a>
+            <a href="#how-it-works" class="font-medium">How It Works</a>
+            <div id="mobileDynamicNavLink" class="text-center">
+                <!-- This will be populated by JavaScript -->
+            </div>
+            <div id="mobileAuthSection" class="mt-4">
+                <!-- This will be populated by JavaScript -->
+            </div>
+        </nav>
+    </div>
+
+    <script>
+        // Check if user is logged in and update UI accordingly
+        document.addEventListener('DOMContentLoaded', function() {
+            const authSection = document.getElementById('authSection');
+            const mobileAuthSection = document.getElementById('mobileAuthSection');
+            const dynamicNavLink = document.getElementById('dynamicNavLink');
+            const mobileDynamicNavLink = document.getElementById('mobileDynamicNavLink');
+            const heroGetStartedButton = document.getElementById('heroGetStartedButton');
+            const finalGetStartedButton = document.getElementById('finalGetStartedButton');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            // Function to render auth UI
+            function renderAuthUI() {
+                if (currentUser) {
+                    // User is logged in - show dashboard link and profile
+                    dynamicNavLink.innerHTML = `
+                        <a href="dashboard.html" class="font-medium hover:text-green-200 transition">Dashboard</a>
+                    `;
+                    
+                    mobileDynamicNavLink.innerHTML = `
+                        <a href="dashboard.html" class="font-medium">Dashboard</a>
+                    `;
+                    
+                    // Update hero section button to go to dashboard
+                    heroGetStartedButton.href = 'dashboard.html';
+                    heroGetStartedButton.textContent = 'Go to Dashboard';
+                    
+                    // Update final CTA button to go to dashboard
+                    finalGetStartedButton.href = 'dashboard.html';
+                    finalGetStartedButton.textContent = 'Go to Dashboard';
+                    
+                    // Show user profile
+                    const profileHtml = `
+                        <div class="profile-container relative">
+                            <button class="flex items-center space-x-2 bg-green-600 hover:bg-green-800 px-3 py-2 rounded-md transition">
+                                <i class="fas fa-user-circle"></i>
+                                <span>${currentUser.username}</span>
+                                <i class="fas fa-chevron-down text-xs"></i>
+                            </button>
+                            <div class="profile-dropdown text-gray-800 py-2">
+                                <div class="px-4 py-2 border-b">
+                                    <p class="font-semibold">${currentUser.username}</p>
+                                    <p class="text-sm text-gray-600">${currentUser.departmentName}</p>
+                                </div>
+                                <a href="dashboard.html" class="block px-4 py-2 hover:bg-gray-100 transition">
+                                    <i class="fas fa-tachometer-alt mr-2"></i>User Dashboard
+                                </a>
+                                <button id="logoutButton" class="w-full text-left px-4 py-2 hover:bg-gray-100 transition text-red-600">
+                                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    
+                    authSection.innerHTML = profileHtml;
+                    mobileAuthSection.innerHTML = `
+                        <div class="text-center">
+                            <p class="mb-2">Logged in as <span class="font-semibold">${currentUser.username}</span></p>
+                            <a href="dashboard.html" class="block bg-green-800 text-white py-2 px-4 rounded-md mb-2">User Dashboard</a>
+                            <button id="mobileLogoutButton" class="bg-red-600 text-white py-2 px-4 rounded-md">Logout</button>
+                        </div>
+                    `;
+                } else {
+                    // User is not logged in - show Get Started link and login button
+                    dynamicNavLink.innerHTML = `
+                        <a href="#get-started" class="font-medium hover:text-green-200 transition">Get Started</a>
+                    `;
+                    
+                    mobileDynamicNavLink.innerHTML = `
+                        <a href="#get-started" class="font-medium">Get Started</a>
+                    `;
+                    
+                    // Reset hero section button to login
+                    heroGetStartedButton.href = 'login.html';
+                    heroGetStartedButton.textContent = 'Get Started';
+                    
+                    // Reset final CTA button to login
+                    finalGetStartedButton.href = 'login.html';
+                    finalGetStartedButton.textContent = 'Get Started Now';
+                    
+                    // Show login button
+                    authSection.innerHTML = `
+                        <a href="login.html" class="bg-green-600 hover:bg-green-800 px-4 py-2 rounded-md transition">
+                            Login
+                        </a>
+                    `;
+                    mobileAuthSection.innerHTML = `
+                        <a href="login.html" class="bg-green-600 hover:bg-green-800 px-6 py-3 rounded-md transition text-lg">
+                            Login
+                        </a>
+                    `;
+                }
+                
+                // Add logout functionality
+                const logoutButton = document.getElementById('logoutButton');
+                const mobileLogoutButton = document.getElementById('mobileLogoutButton');
+                
+                if (logoutButton) {
+                    logoutButton.addEventListener('click', function() {
+                        localStorage.removeItem('currentUser');
+                        location.reload();
+                    });
+                }
+                
+                if (mobileLogoutButton) {
+                    mobileLogoutButton.addEventListener('click', function() {
+                        localStorage.removeItem('currentUser');
+                        location.reload();
+                    });
+                }
+            }
+            
+            // Initial render
+            renderAuthUI();
+            
+            // Mobile menu functionality
+            const menuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const closeMenu = document.getElementById('closeMenu');
+            
+            if (menuButton && mobileMenu && closeMenu) {
+                menuButton.addEventListener('click', function() {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                });
+                
+                closeMenu.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                });
+            }
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        // Close mobile menu if open
+                        if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                            mobileMenu.classList.remove('flex');
+                        }
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Simple counter animation for stats
+            const counters = document.querySelectorAll('.text-3xl.font-bold.text-green-700');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent);
+                let current = 0;
+                const increment = target / 50;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.textContent = Math.ceil(current) + (counter.textContent.includes('%') ? '%' : '');
+                        setTimeout(updateCounter, 30);
+                    } else {
+                        counter.textContent = target + (counter.textContent.includes('%') ? '%' : '');
+                    }
+                };
+                
+                // Start counter when element is in viewport
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+        });
+    </script>
+</body>
+</html>

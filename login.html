@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - University Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .error-message {
+            color: #EF4444;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+        .success-message {
+            color: #10B981;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- Logo Section -->
+        <div class="text-center mb-8">
+            <img src="https://www.uniport.edu.ng/wp-content/themes/unipix/assets/images/logo/uniport_logo1.png" 
+                 alt="University of Port Harcourt Logo" 
+                 class="mx-auto max-w-[200px]">
+        </div>
+        
+        <!-- Login Form -->
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Login</h1>
+            
+            <form id="loginForm">
+                <!-- Username Field -->
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
+                    <input type="text" id="username" name="username" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" 
+                           required>
+                    <div id="usernameError" class="error-message">Please enter a valid username</div>
+                </div>
+                
+                <!-- Password Field -->
+                <div class="mb-4">
+                    <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+                    <input type="password" id="password" name="password" 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" 
+                           required>
+                    <div id="passwordError" class="error-message">Please enter your password</div>
+                </div>
+                
+                <!-- Department Field -->
+                <div class="mb-6">
+                    <label for="department" class="block text-gray-700 font-medium mb-2">Department</label>
+                    <select id="department" name="department" 
+                            class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                        <option value="" disabled selected>Select your department</option>
+                        <option value="computer-science">Computer Science</option>
+                        <option value="electrical-engineering">Electrical Engineering</option>
+                        <option value="mechanical-engineering">Mechanical Engineering</option>
+                        <option value="civil-engineering">Civil Engineering</option>
+                        <option value="business-administration">Business Administration</option>
+                        <option value="accounting">Accounting</option>
+                        <option value="economics">Economics</option>
+                        <option value="law">Law</option>
+                        <option value="medicine">Medicine</option>
+                        <option value="pharmacy">Pharmacy</option>
+                    </select>
+                    <div id="departmentError" class="error-message">Please select your department</div>
+                </div>
+                
+                <!-- Login Status Message -->
+                <div id="loginStatus" class="success-message mb-4"></div>
+               
+                <!-- Green Login Button -->
+                <button type="submit" 
+                        class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-3 px-4 rounded-md transition duration-200 flex items-center justify-center">
+                    <span id="loginText">Login</span>
+                    <i id="loginSpinner" class="fas fa-spinner fa-spin ml-2 hidden"></i>
+                </button>
+            </form>
+            
+            <!-- Sign Up Link -->
+            <div class="text-center mt-6 text-gray-600">
+                Don't have an account? 
+                <a href="#" class="text-green-600 hover:text-green-800 font-medium">Sign up as Department Admin</a>.
+            </div>
+            
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const departmentInput = document.getElementById('department');
+            const loginText = document.getElementById('loginText');
+            const loginSpinner = document.getElementById('loginSpinner');
+            const loginStatus = document.getElementById('loginStatus');
+            
+            // Check if user is already logged in
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                // Redirect to home page if already logged in
+                window.location.href = 'index.html';
+            }
+            
+            // Form submission handler
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Reset error messages
+                resetErrorMessages();
+                
+                // Validate form
+                let isValid = true;
+                
+                if (!usernameInput.value.trim()) {
+                    showError('usernameError', 'Please enter a username');
+                    isValid = false;
+                }
+                
+                if (!passwordInput.value) {
+                    showError('passwordError', 'Please enter your password');
+                    isValid = false;
+                }
+                
+                if (!departmentInput.value) {
+                    showError('departmentError', 'Please select your department');
+                    isValid = false;
+                }
+                
+                if (!isValid) return;
+                
+                // Show loading state
+                loginText.textContent = 'Logging in...';
+                loginSpinner.classList.remove('hidden');
+                
+                // Simulate login process (in a real app, this would be an API call)
+                setTimeout(function() {
+                    // Create user object
+                    const user = {
+                        username: usernameInput.value.trim(),
+                        department: departmentInput.value,
+                        departmentName: departmentInput.options[departmentInput.selectedIndex].text,
+                        loginTime: new Date().toISOString(),
+                        lastActivity: new Date().toISOString()
+                    };
+                    
+                    // Save user to localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    
+                    // Get existing users or initialize empty array
+                    const existingUsers = JSON.parse(localStorage.getItem('users')) || [];
+                    
+                    // Check if user already exists
+                    const userIndex = existingUsers.findIndex(u => u.username === user.username);
+                    
+                    if (userIndex === -1) {
+                        // Add new user
+                        existingUsers.push(user);
+                    } else {
+                        // Update existing user
+                        existingUsers[userIndex] = user;
+                    }
+                    
+                    // Save updated users list
+                    localStorage.setItem('users', JSON.stringify(existingUsers));
+                    
+                    // Show success message
+                    showSuccess('loginStatus', 'Login successful! Redirecting to home page...');
+                    
+                    // Redirect to home page after a short delay
+                    setTimeout(function() {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                    
+                }, 1500); // Simulate network delay
+            });
+            
+            // Helper functions
+            function showError(elementId, message) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+            
+            function showSuccess(elementId, message) {
+                const successElement = document.getElementById(elementId);
+                successElement.textContent = message;
+                successElement.style.display = 'block';
+            }
+            
+            function resetErrorMessages() {
+                const errorMessages = document.querySelectorAll('.error-message');
+                errorMessages.forEach(msg => {
+                    msg.style.display = 'none';
+                });
+                loginStatus.style.display = 'none';
+            }
+            
+            // Input validation on blur
+            usernameInput.addEventListener('blur', function() {
+                if (!this.value.trim()) {
+                    showError('usernameError', 'Please enter a username');
+                }
+            });
+            
+            passwordInput.addEventListener('blur', function() {
+                if (!this.value) {
+                    showError('passwordError', 'Please enter your password');
+                }
+            });
+            
+            departmentInput.addEventListener('change', function() {
+                if (this.value) {
+                    document.getElementById('departmentError').style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

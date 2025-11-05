@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - Waste Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .status-completed {
+            color: #10B981;
+            background-color: #D1FAE5;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+        .status-probing {
+            color: #F59E0B;
+            background-color: #FEF3C7;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+        .status-pending {
+            color: #EF4444;
+            background-color: #FEE2E2;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.75rem;
+        }
+        .mobile-card {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation Header -->
+    <header class="bg-green-700 text-white p-4 shadow-md sticky top-0 z-10">
+        <div class="container mx-auto flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <img src="https://www.uniport.edu.ng/wp-content/themes/unipix/assets/images/logo/uniport_logo1.png" 
+                     alt="University of Port Harcourt Logo" 
+                     class="h-10 w-auto">
+                <h1 class="text-lg font-bold">Unique Waste Management System</h1>
+            </div>
+            <div class="flex space-x-2">
+                <a href="dashboard.html" class="bg-green-800 px-3 py-1 rounded-md text-sm font-medium">User Dashboard</a>
+                
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto p-4">
+        <!-- Page Title -->
+        <div class="mb-6">
+            <h1 class="text-2xl font-bold text-gray-800">Waste Bin Report</h1>
+            <p class="text-gray-600 mt-1">Monitor and report waste bin levels</p>
+        </div>
+        
+        <!-- Waste Bin Level Section -->
+        <div class="bg-white rounded-lg shadow-md p-4 mb-6 mobile-card">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4">Waste Bin Level (%)</h2>
+            
+            <!-- Current Level Visualization -->
+            <div class="mb-6">
+                <div class="flex justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700">Current Level</span>
+                    <span class="text-sm font-bold text-green-700">45%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div class="bg-green-600 h-4 rounded-full" style="width: 45%"></div>
+                </div>
+            </div>
+            
+            <!-- Report Waste Level Form -->
+            <div class="bg-gray-50 p-4 rounded-lg mb-6">
+                <h3 class="text-lg font-medium text-gray-700 mb-3">Report Waste Level</h3>
+                <form class="space-y-4">
+                    <div>
+                        <label for="waste-level" class="block text-sm font-medium text-gray-700 mb-1">Waste Level (%)</label>
+                        <input type="number" id="waste-level" name="waste-level" min="0" max="100" 
+                               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                    </div>
+                    <div>
+                        <label for="water-status" class="block text-sm font-medium text-gray-700 mb-1">Water Status</label>
+                        <select id="water-status" name="water-status" 
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <option value="completed">Completed</option>
+                            <option value="probing">Probing</option>
+                            <option value="pending">Pending</option>
+                        </select>
+                    </div>
+                    <button type="submit" 
+                            class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md transition duration-200">
+                        Submit Report
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Disposal History Section -->
+        <div class="bg-white rounded-lg shadow-md p-4 mobile-card">
+            <h3 class="text-lg font-medium text-gray-700 mb-3">Disposal History</h3>
+            
+            <!-- Mobile Card View for History -->
+            <div class="space-y-4 md:hidden">
+                <div class="border border-gray-200 rounded-lg p-3">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-medium">Level: 70%</span>
+                        <span class="status-completed">Completed</span>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div><span class="font-medium">Water:</span> Completed</div>
+                        <div><span class="font-medium">Reported:</span> 2025-10-22 07:13:44</div>
+                        <div><span class="font-medium">Borrowed:</span> 2025-10-22 07:13:40</div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-3">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-medium">Level: 85%</span>
+                        <span class="status-completed">Completed</span>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div><span class="font-medium">Water:</span> Completed</div>
+                        <div><span class="font-medium">Reported:</span> 2025-10-22 03:22:54</div>
+                        <div><span class="font-medium">Borrowed:</span> 2025-10-22 03:22:08</div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-3">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-medium">Level: 60%</span>
+                        <span class="status-completed">Completed</span>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div><span class="font-medium">Water:</span> Completed</div>
+                        <div><span class="font-medium">Reported:</span> 2025-10-22 02:41:39</div>
+                        <div><span class="font-medium">Borrowed:</span> -</div>
+                    </div>
+                </div>
+                
+                <div class="border border-gray-200 rounded-lg p-3">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-medium">Level: 45%</span>
+                        <span class="status-probing">Probing</span>
+                    </div>
+                    <div class="text-sm text-gray-600 space-y-1">
+                        <div><span class="font-medium">Water:</span> Probing</div>
+                        <div><span class="font-medium">Reported:</span> 2025-10-22 07:29:00</div>
+                        <div><span class="font-medium">Borrowed:</span> -</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Desktop Table View for History -->
+            <div class="hidden md:block overflow-x-auto">
+                <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                    <thead class="bg-gray-100">
+                        <tr>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Waste Bin Level (%)</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Water</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Data Reported</th>
+                            <th class="py-3 px-4 text-left text-sm font-medium text-gray-700 border-b">Data Borrowed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 border-b">70</td>
+                            <td class="py-3 px-4 border-b"><span class="status-completed">Completed</span></td>
+                            <td class="py-3 px-4 border-b">2025-10-22 07:13:44</td>
+                            <td class="py-3 px-4 border-b">2025-10-22 07:13:40</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 border-b">85</td>
+                            <td class="py-3 px-4 border-b"><span class="status-completed">Completed</span></td>
+                            <td class="py-3 px-4 border-b">2025-10-22 03:22:54</td>
+                            <td class="py-3 px-4 border-b">2025-10-22 03:22:08</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 border-b">60</td>
+                            <td class="py-3 px-4 border-b"><span class="status-completed">Completed</span></td>
+                            <td class="py-3 px-4 border-b">2025-10-22 02:41:39</td>
+                            <td class="py-3 px-4 border-b">-</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50">
+                            <td class="py-3 px-4 border-b">45</td>
+                            <td class="py-3 px-4 border-b"><span class="status-probing">Probing</span></td>
+                            <td class="py-3 px-4 border-b">2025-10-22 07:29:00</td>
+                            <td class="py-3 px-4 border-b">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <footer class="mt-8 py-4 text-center text-gray-500 text-sm">
+        <p>Unique Waste Management System &copy; 2025</p>
+    </footer>
+</body>
+</html>
