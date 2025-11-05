@@ -42,14 +42,14 @@
     <header class="bg-green-700 text-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-3">
             <div class="flex items-center justify-between">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3">
+                <!-- Logo - Smaller on mobile -->
+                <div class="flex items-center space-x-2 md:space-x-3">
                     <img src="https://www.uniport.edu.ng/wp-content/themes/unipix/assets/images/logo/uniport_logo1.png" 
                          alt="University of Port Harcourt Logo" 
-                         class="h-12 w-auto">
-                    <div>
-                        <h1 class="text-xl font-bold">Unique Waste Management System</h1>
-                        <p class="text-green-200 text-sm">University of Port Harcourt</p>
+                         class="h-8 md:h-12 w-auto">
+                    <div class="hidden sm:block">
+                        <h1 class="text-lg md:text-xl font-bold">Unique Waste Management System</h1>
+                        <p class="text-green-200 text-xs md:text-sm">University of Port Harcourt</p>
                     </div>
                 </div>
                 
@@ -322,9 +322,22 @@
             const finalGetStartedButton = document.getElementById('finalGetStartedButton');
             const currentUser = JSON.parse(localStorage.getItem('currentUser'));
             
+            // Function to get first part of email/username
+            function getDisplayName(username) {
+                if (!username) return 'User';
+                // If it's an email, get the part before @
+                if (username.includes('@')) {
+                    return username.split('@')[0];
+                }
+                // Otherwise, just return the username
+                return username;
+            }
+            
             // Function to render auth UI
             function renderAuthUI() {
                 if (currentUser) {
+                    const displayName = getDisplayName(currentUser.username);
+                    
                     // User is logged in - show dashboard link and profile
                     dynamicNavLink.innerHTML = `
                         <a href="dashboard.html" class="font-medium hover:text-green-200 transition">Dashboard</a>
@@ -342,18 +355,18 @@
                     finalGetStartedButton.href = 'dashboard.html';
                     finalGetStartedButton.textContent = 'Go to Dashboard';
                     
-                    // Show user profile
+                    // Show user profile with icon and display name
                     const profileHtml = `
                         <div class="profile-container relative">
                             <button class="flex items-center space-x-2 bg-green-600 hover:bg-green-800 px-3 py-2 rounded-md transition">
-                                <i class="fas fa-user-circle"></i>
-                                <span>${currentUser.username}</span>
+                                <i class="fas fa-user-circle text-lg"></i>
+                                <span class="hidden sm:inline">${displayName}</span>
                                 <i class="fas fa-chevron-down text-xs"></i>
                             </button>
                             <div class="profile-dropdown text-gray-800 py-2">
                                 <div class="px-4 py-2 border-b">
                                     <p class="font-semibold">${currentUser.username}</p>
-                                    <p class="text-sm text-gray-600">${currentUser.departmentName}</p>
+                                    ${currentUser.departmentName ? `<p class="text-sm text-gray-600">${currentUser.departmentName}</p>` : ''}
                                 </div>
                                 <a href="dashboard.html" class="block px-4 py-2 hover:bg-gray-100 transition">
                                     <i class="fas fa-tachometer-alt mr-2"></i>User Dashboard
@@ -368,7 +381,7 @@
                     authSection.innerHTML = profileHtml;
                     mobileAuthSection.innerHTML = `
                         <div class="text-center">
-                            <p class="mb-2">Logged in as <span class="font-semibold">${currentUser.username}</span></p>
+                            <p class="mb-2">Logged in as <span class="font-semibold">${displayName}</span></p>
                             <a href="dashboard.html" class="block bg-green-800 text-white py-2 px-4 rounded-md mb-2">User Dashboard</a>
                             <button id="mobileLogoutButton" class="bg-red-600 text-white py-2 px-4 rounded-md">Logout</button>
                         </div>
